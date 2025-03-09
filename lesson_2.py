@@ -10,10 +10,12 @@ items = {key: float(input(f"Введите значение ингридиент
 
 magic_power = sum([items[x] * power_sets[i] for i, x in enumerate(list_of_ingr)]) 
 
-
 count_items = sum(items.values())
 
-magic_power += 20 * (count_items > 150)
+bonus = 20 * (count_items > 150)
+
+magic_power += bonus
+
 
 print(f"Вы приготовили зелье мощностью {magic_power} чаров.")
 input("Нажмите Enter для выхода...")

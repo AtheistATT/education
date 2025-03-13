@@ -6,7 +6,7 @@
 import time
 import random
 from colorama import Fore
-import pdb
+#import pdb
 import inquirer
 
 class Essence: # Класс сущности. Содержит общие характеристики как игрока так и монстра
@@ -50,7 +50,7 @@ class Essence: # Класс сущности. Содержит общие хар
                     self.damage(enemy)
                 else:
                     print(f"{enemy.me} блокирует атаку")
-            pdb.set_trace()
+           # pdb.set_trace()
 
 class Monster(Essence):
     #   Списки монстров и их характеристик

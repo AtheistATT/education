@@ -6,7 +6,7 @@
 import time
 import random
 from colorama import Fore
-#import pdb
+import pdb
 import inquirer
 
 class Essence: # Класс сущности. Содержит общие характеристики как игрока так и монстра
@@ -18,7 +18,7 @@ class Essence: # Класс сущности. Содержит общие хар
         self.rez = ''
         self.name = ''
 
-    def demage(self, enemy):# Метод который вызывается в случе если соблюдены условия получения урона противником
+    def damage(self, enemy):# Метод который вызывается в случе если соблюдены условия получения урона противником
         prot = random.randint(1, 5)
         dam = random.randint(5, self.max_damage)
         
@@ -40,16 +40,17 @@ class Essence: # Класс сущности. Содержит общие хар
             print(f"{self.me} защищается.")
             return
         else:
-            if enemy.ch == "Атака":
+            if enemy.ch == "Атаковать":
                 if self.rez == "Удача":
-                    self.demage(enemy)
+                        self.damage(enemy)
                 else:
                     print(f"{self.me} промахивается.")
             else:
                 if enemy.rez == "Неудача":
-                    self.demage(enemy)
+                    self.damage(enemy)
                 else:
                     print(f"{enemy.me} блокирует атаку")
+            pdb.set_trace()
 
 class Monster(Essence):
     #   Списки монстров и их характеристик
@@ -84,19 +85,19 @@ class Monster(Essence):
 
         match(behavior):
             case "Трусливый":
-                ch = "Атака" if random.randint(1,6) == 1 else "Защита"
+                ch = "Атаковать" if random.randint(1,6) == 1 else "Защищаться"
                 print(f"Монстр выбрал стратегию - {ch}")
             case "Осторожный":
-                ch = "Атака" if random.randint(1,6) <= 2 else "Защита"
+                ch = "Атаковать" if random.randint(1,6) <= 2 else "Защищаться"
                 print(f"Монстр выбрал стратегию - {ch}")
             case "Разумный":
-                ch = "Атака" if random.randint(1,6) <= 3 else "Защита"
+                ch = "Атаковать" if random.randint(1,6) <= 3 else "Защищаться"
                 print(f"Монстр выбрал стратегию - {ch}")
             case "Злой":
-                ch = "Атака" if random.randint(1,6) <= 4 else "Защита"
+                ch = "Атаковать" if random.randint(1,6) <= 4 else "Защищаться"
                 print(f"Монстр выбрал стратегию - {ch}")
             case "Яростный":
-                ch = "Атака" if random.randint(1,6) <= 5 else "Защита"
+                ch = "Атаковать" if random.randint(1,6) <= 5 else "Защищаться"
                 print(f"Монстр выбрал стратегию - {ch}")
 
         rez = "Неудача" if random.randint(1,3) == 1 else "Удача"

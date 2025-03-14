@@ -52,8 +52,8 @@ def attack(choise_1, choise_2, subject_name):# Просчет результат
         time.sleep(delay)
     elif choise_2 == "защита" and subject_name == "Монстр":
         print("Два дурачка стоят и защищаются! Ахахахах!")
-player_hp = 10
-monster_hp = 10
+#player_hp = 10
+#monster_hp = 10
 
 while True:
     if monster_hp <= 0 or player_hp <= 0:

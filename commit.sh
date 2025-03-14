@@ -5,7 +5,7 @@ if [[ -z "$GIT_USERNAME" || -z "$GIT_TOKEN" ]]; then
   exit 1
 fi
 
-REPO_URL="https://${GIT_USERNAME}:${GIT_TOKEN}@github.com/ваш-username/ваш-репозиторий.git"
+REPO_URL="https://${GIT_USERNAME}:${GIT_TOKEN}@github.com/AtheistATT/education"
 
 git add .
 

@@ -37,12 +37,7 @@ def attack(choise_1, choise_2, subject_name):# Просчет результат
     s_dam = random.randint(0, 10)
     e_arm = random.randint(0, 10)
 
-    if choise_1 == "защита" and choise_2 == "защита" and subject_name == "Игрок":
-        print("Два дурачка стоят и защищаются! Ахахахах!")
-        return
-    elif choise_1 == "защита":
-        return
-    else:
+    if choise_1 == "атака": 
         if choise_2 == "защита":
             print(f"{"Монстр" if subject_name == "Игрок" else "Игрок"} защищается. Броня: {e_arm}")
             s_dam = max(0, s_dam - e_arm)
@@ -55,9 +50,10 @@ def attack(choise_1, choise_2, subject_name):# Просчет результат
             player_hp -= s_dam
         print(f"{subject_name} наносит {s_dam} урона")
         time.sleep(delay)
-
-#player_hp = 10
-#monster_hp = 10
+    elif choise_2 == "защита" and subject_name == "Монстр":
+        print("Два дурачка стоят и защищаются! Ахахахах!")
+player_hp = 10
+monster_hp = 10
 
 while True:
     if monster_hp <= 0 or player_hp <= 0:

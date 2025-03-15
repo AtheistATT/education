@@ -4,7 +4,7 @@ from colorama import Fore
 import json
 import os
 import re
-import pdb
+#import pdb
 
 class InvalidJsonData(Exception):
     def __init__(self, message = "Не корректный формат данных") -> None:

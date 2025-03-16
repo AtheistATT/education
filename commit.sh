@@ -16,3 +16,5 @@ git commit -m "$commit_message"
 git push $REPO_URL master
 
 echo "Коммит выполнен и изменения отправлены в репозиторий."
+
+read

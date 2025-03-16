@@ -9,6 +9,10 @@ REPO_URL="https://${GIT_USERNAME}:${GIT_TOKEN}@github.com/AtheistATT/education"
 
 git add .
 
+git ls-files --ignored --exclude-standard | while read file; do
+  git rm --cached "$file"
+done
+
 read -p "Введите сообщение для коммита: " commit_message
 
 git commit -m "$commit_message"
@@ -17,4 +21,4 @@ git push $REPO_URL master
 
 cowsay "Коммит выполнен и изменения отправлены в репозиторий."
 
-read
+read -p "Нажмите Enter для выхода..."

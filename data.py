@@ -2,6 +2,10 @@ import os
 import json
 import re
 import creature
+from rich.console import Console
+
+console = Console()
+
 class InvalidJsonData(Exception):
     def __init__(self, message = "Не корректный формат данных") -> None:
         self.message = message
@@ -43,7 +47,7 @@ def load():
         ans = input("Обнаружен файл сохранения. Хотите начать играть с него(да/нет)").lower()
 
         if ans == "нет":
-            save()
+            save(creature.Player(), creature.Monster(), 1)
 
     try:
         with open("save.json", "r") as save_file:
@@ -57,7 +61,7 @@ def load():
 
     except FileNotFoundError:
         console.print("Файл сохранения не существует и будет создан автоматически!")
-        save()
+        save(creature.Player(), creature.Monster(), turn)
     except json.JSONDecodeError:
         incorrect_file()
     except InvalidJsonData as e:

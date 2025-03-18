@@ -7,7 +7,7 @@ class GameConstants(): # Вынес все константы в отдельн�
     DEFENSE = "Защита"
     MAX_DEFENSE = 10
     MAX_ATTACK = 10
-    MAX_HP = 100
+    MAX_HP = 125
     MONSTER_NAME = "Монстр"
     PLAYER_NAME = "Игрок"
     MESSAGE_CHOICE = "Выберете свою стратегию (Атака/Защита/Выход)"
@@ -30,7 +30,13 @@ class Creature(): # Базовый класс для игрока и монст�
 
     def attack(self, enemy):
         self.attack_power = random.randint(0, GameConstants.MAX_ATTACK) if self.choice == GameConstants.ATTACK else 0
-        enemy.hp -= max(0, self.attack_power - enemy.defense)
+        enemy.take_demage(self.attack_power)
+ 
+    def take_demage(self, amound):
+        self.hp -= max(0, amound - self.defense)   
+
+    def display_helth(self):
+        return f"{self.hp}({int(self.hp/ GameConstants.MAX_HP * 100)}%)"
 
 #    def test(self):# Вывод данных нужен исключительно для тестирования
 #        print(f"hp:{self.hp}")

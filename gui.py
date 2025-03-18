@@ -12,8 +12,8 @@ def draw_table(player, monster, turn):
     table.add_column("Сила атаки")
     table.add_column("Здоровье")
 
-    table.add_row(player.name, player.choice, str(player.defense), str(player.attack_power), str(player.hp))
-    table.add_row(monster.name, monster.choice, str(monster.defense), str(monster.attack_power), str(monster.hp))
+    table.add_row(player.name, player.choice, str(player.defense), str(player.attack_power), player.display_helth())
+    table.add_row(monster.name, monster.choice, str(monster.defense), str(monster.attack_power), monster.display_helth())
 
 
     console.print(table)

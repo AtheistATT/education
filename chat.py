@@ -9,8 +9,7 @@ process = subprocess.Popen(
 )
 
 process.stdin.write("1\n")
-process.stdin.write("Что нового?\n")
-process.stdin.write("Как называется столица Франции?\n")
+process.stdin.write("Привет!\n")
 process.stdin.flush()
 
 # Прочитай ответ

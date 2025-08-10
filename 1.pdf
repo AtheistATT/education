@@ -6,6 +6,7 @@ digraph Test {
 	3 -> 4
 	4 -> 2
 	3 -> q
+	img [label="" fixedsize=true height=2 image="./1.png" shape=none width=2]
 	f [label="Кириллица" color=green shape=square]
 	f -> 4
 	subgraph cluster_legend {

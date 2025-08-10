@@ -8,7 +8,7 @@ d.edge('q', '3')
 d.edge('3', '4')
 d.edge('4', '2')
 d.edge('3', 'q')
-
+d.node('img', label='', image='./1.png', shape="none", width="2", height="2", fixedsize="true")
 d.node("f", "Кириллица", color="green", shape='square')
 d.edge("f", "4")
 with d.subgraph(name='cluster_legend') as c:

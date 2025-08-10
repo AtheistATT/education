@@ -1,0 +1,16 @@
+digraph Test {
+	node [shape=star]
+	fontname="DejaVu Sans" fontsize=20 label="Схема икон" labelloc=t rankdir=LR
+	q -> 2
+	q -> 3
+	3 -> 4
+	4 -> 2
+	3 -> q
+	f [label="Кириллица" color=green shape=square]
+	f -> 4
+	subgraph cluster_legend {
+		fontsize=16 label="Легенда"
+		L1 [label="Кириллица" color=green fontname="DejaVu Sans" shape=square]
+		L2 [label="Узел 2" color=red shape=circle]
+	}
+}

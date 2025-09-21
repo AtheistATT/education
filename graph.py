@@ -1,5 +1,5 @@
 import graphviz
-
+#dsdsasd
 d = graphviz.Digraph("Test")
 d.attr(label="Схема икон", fontsize="20", fontname="DejaVu Sans", labelloc="t", rankdir="LR") 
 d.node_attr.update(shape='star')

@@ -1,0 +1,377 @@
+package main
+
+import "fmt"
+
+type Game struct {
+	Title string
+	Genre string
+	Year  int
+}
+
+func main() {
+	games := []Game{{Title: "DOOM", Genre: "Shooter", Year: 1993}, {Title: "Morrowind", Genre: "RPG", Year: 2002}, {Title: "TF2", Genre: "Online action", Year: 2007}}
+
+	games = append(games, Game{Title: "Half life", Genre: "Shooter", Year: 1998})
+
+	for index, game := range games {
+		fmt.Printf("%d. Игра: %s Жанр: %s Год выхода: %d\n", index+1, game.Title, game.Genre, game.Year)
+	}
+}
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+type Game struct {
+	Title string
+	Genre string
+	Year  int
+}
+
+func (g Game) PrintInfo() {
+	fmt.Printf("Игра: %s Жанр: %s Год выхода: %d Возраст: %d\n", g.Title, g.Genre, g.Year, g.Age())
+}
+
+func (g Game) Age() int {
+	t := time.Now()
+	return t.Year() - g.Year
+}
+
+func main() {
+	games := []Game{{Title: "DOOM", Genre: "Shooter", Year: 1993}, {Title: "Morrowind", Genre: "RPG", Year: 2002}, {Title: "TF2", Genre: "Online action", Year: 2007}}
+
+	games = append(games, Game{Title: "Half life", Genre: "Shooter", Year: 1998})
+
+	for _, game := range games {
+		game.PrintInfo()
+	}
+}
+package main
+
+import "fmt"
+
+type Player struct{
+	Name string
+	Health int
+}
+
+func (p *Player) TakeDamage(damage int){
+	p.Health -= damage
+}
+
+func (p *Player) IsAlive() bool{
+	if p.Health <= 0{
+		return false
+	}else{
+		return true
+	}
+}
+
+func main(){
+	player := Player{Name: "Авантюрист", Health: 100}
+
+	fmt.Println(player.Name + "заходит в игру!")
+
+	player.TakeDamage(20)
+	fmt.Printf("Мерзкая крыса наносит %d урона!\n", 20)
+	fmt.Printf("Герой выжил? %v \n", player.IsAlive())
+	player.TakeDamage(200)
+	fmt.Printf("Горный великан наносит %d урона!\n", 200)
+	fmt.Printf("Герой выжил? %v \n", player.IsAlive())
+	player.TakeDamage(-220)
+	fmt.Printf("Приходит паладин и лечит героя на %d единиц!\n", 220)
+	fmt.Printf("Теперь герой жив? %v\n", player.IsAlive())
+
+}
+package main
+
+import "fmt"
+
+type Shouter interface{
+	Shout()
+}
+
+type Human struct{
+	Name string
+}
+
+type Monster struct{
+	Type string
+}
+
+func (h Human) Shout(){
+	fmt.Printf("Меня зовут %s, помогите!\n", h.Name)
+}
+
+func (m Monster) Shout(){
+	fmt.Printf("ГРРРРРРР! Я %s!\n", m.Type)
+}
+
+func Intro(s Shouter){
+	fmt.Print("Кто-то кричит: ")
+	s.Shout()
+}
+
+func main(){
+	u1 := Human{Name: "Ринсвинд"}
+	u2 := Monster{Type: "Белшамгарот"}
+
+	Intro(u1)
+	Intro(u2)
+}
+package main
+
+import("fmt"
+		"errors")
+
+func CastSpell(mana int)(string, error){
+	if mana > 50{
+		return "Ринсвинд поднатужившись выпустает чуть теплый шарик.", nil
+	}
+	if mana > 0{
+		return "На пальцах ринсвинда появляются слабые разряды статического электричества", nil
+	}
+	if mana <= 0{
+		return "", errors.New("От отчаяния Ринсвинд произносит восьмое заклинание Октаво и разрушает мир")
+	}
+	return "", errors.New("Если правила математики в вашем мире уже не работаюст да поможет вам Бог")
+}
+
+func main(){
+
+	for{		
+		var mana int
+
+		fmt.Println("Введите количество маны Ринсвинда\n>>>")
+		fmt.Scan(&mana)
+		magicSpell, e := CastSpell(mana)
+
+		if e == nil{
+			fmt.Println(magicSpell)
+		}else{
+			fmt.Println(e.Error())
+			break
+		}
+	}
+}
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func SeachBook(librarianName string, bookTitle string){
+	time.Sleep(time.Second * 2)
+	fmt.Printf("%s нашел книгу '%s'\n", librarianName, bookTitle)
+}
+
+func main(){
+go SeachBook("Гораций", "Книга точных предсказаний Агнессы Псих")
+go SeachBook("Ринсвинд", "Октаво")
+go SeachBook("Шноби Шнобс", "Книга из резервуара со льдос с огромной надписью 'ДОЗВОЛЕНО ЧИТАТЬ ТОЛЬКО МАГАМ СТАРШЕ 200 ЛЕТ (ЖЕЛАТЕЛЬНО МЕРТВЫМ)'")
+
+time.Sleep(time.Second * 3)
+}
+package main
+
+import "fmt"
+
+func SeachBook(libreirianName string, bookTitle string, ch chan string){
+	result := fmt.Sprintf("%s нашел книгу %s\n", libreirianName, bookTitle)
+	ch <- result
+}
+
+func main(){
+	channel := make(chan string)
+
+	go SeachBook("Моркоу", "Сборник законов Анк-Морпорка", channel)
+	go SeachBook("Чудакулли", "Настольная книга охотника и рыболова с большим магическим потенциалом", channel)
+	go SeachBook("Ветинари", "Государь Макиавелли", channel)
+
+	fmt.Println(<-channel)
+	fmt.Println(<-channel)
+	fmt.Println(<-channel)
+
+}
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Println("Андрюша. 36 годиков")
+	fmt.Println("Я начинаю изучать Go!")
+}
+package main
+
+import "fmt"
+
+func main() {
+	var year int = 2024
+	target := "Стать Go разработчиком!"
+	var isLearning bool = true
+
+	fmt.Println(year, target, isLearning)
+}
+package main
+
+import "fmt"
+
+func main() {
+	var salary int = 50000
+	var taxRate float32 = 0.13
+
+	res := float32(salary) * (1 - taxRate)
+
+	a := 10
+	b := 20
+
+	a, b = b, a
+
+	fmt.Println(res, a, b)
+}
+package main
+
+import "fmt"
+
+func main() {
+
+	role := "admin"
+	age := 20
+
+	if role == "admin" {
+		fmt.Println("Полный доступ разрешен")
+	} else {
+		if role == "user" && age >= 18 {
+			fmt.Println("Ограниченый доступ разрешен")
+		} else {
+			fmt.Println("Доступ запрещен")
+		}
+	}
+
+}
+package main
+
+import "fmt"
+
+func main() {
+
+	for i := 1; i < 21; i++ {
+		if i%3 == 0 && i%5 == 0 {
+			fmt.Println("Число", i, "- БИНГО!")
+		} else if i%3 == 0 {
+			fmt.Println("Число", i, "делится на 3")
+		} else if i%5 == 0 {
+			fmt.Println("Число", i, "делится на 5")
+		}
+	}
+}
+package main
+
+import "fmt"
+
+func main() {
+	var num1 float64
+	var num2 float64
+	var operator string
+
+	fmt.Scan(&num1, &operator, &num2)
+
+	switch operator {
+	case "+":
+		fmt.Println(num1 + num2)
+	case "-":
+		fmt.Println(num1 - num2)
+	case "*":
+		fmt.Println(num1 * num2)
+	case "/":
+		if num2 == 0 {
+			fmt.Println("♾️")
+		} else {
+			fmt.Printf("%.2f\n", num1/num2)
+		}
+	}
+
+}
+package main
+
+import "fmt"
+
+func main() {
+	grades := []int{5, 4, 3, 2, 5}
+
+	grades = append(grades, 4)
+	var sum int
+	var maxG int
+
+	for _, value := range grades {
+
+		sum += value
+
+		if maxG < value {
+			maxG = value
+		}
+	}
+
+	fmt.Println(float64(sum) / float64(len(grades)))
+
+}
+package main
+
+import "fmt"
+
+func analyzeGrates(grates []int) (avg float64, maxG int) {
+
+	var total int
+	var maxGOut int
+
+	for _, value := range grates {
+
+		total += value
+
+		if maxGOut < value {
+			maxG = value
+		}
+
+	}
+
+	return float64(total) / float64(len(grates)), maxGOut
+}
+
+func main() {
+
+	avg, maxG := analyzeGrates([]int{3, 4, 2, 4, 3, 4, 3})
+
+	fmt.Printf("Средняя оценка: %.2f | Высшая оценка: %d\n", avg, maxG)
+}
+package main
+
+import "fmt"
+
+func main() {
+
+	phonebook := make(map[string]string)
+
+	phonebook["deadpool"] = "666869666"
+	phonebook["BG"] = "2128506"
+	phonebook["Arthor"] = "Camelot is a stupit sity"
+
+	_, ok := phonebook["Arthor"]
+
+	if ok {
+		delete(phonebook, "Arthor")
+	}
+
+	_, ok1 := phonebook["Дмитрий"]
+
+	if !ok1 {
+		fmt.Println("Дмитрий не найден!")
+	}
+
+	for key, value := range phonebook {
+		fmt.Printf("Имя: %s Номер: %s\n", key, value)
+	}
+
+}
